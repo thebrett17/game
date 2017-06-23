@@ -1,0 +1,363 @@
+from sys import exit
+
+def win():
+	print "You won the game!"
+	print "\nBefore you leave, could you give it a rating?"
+	
+	awnser = raw_input("? / 10 \n>")
+	
+	rating =  int(awnser)
+	
+	if rating < 3:
+		print "Screw you then."
+		dead("fite me")
+	elif rating == 4 or 5 or 6:
+		print "I can live with that"
+		exit(0)
+	elif rating == 7 or 8:
+		print "Thanks"
+		exit(0)
+	elif rating == 9 or 10:
+		print "Woah, I am that cool?"
+		exit(0)
+	else:
+		print "I said 1 to 10"
+		exit(0)
+
+def dead(why):
+	print "\n\n[YOU DIED]"
+	print "[CAUSE]: %s" % why
+	exit(0)
+	
+def Cthulhu_room():
+	print "You gaze into the eyes of the great and evil Cthulhu."
+	print "Do you flee or eat your own head?"
+	
+	awnser = raw_input("> ")
+	
+	if "eat" in awnser:
+		dead("Delicious!")
+	elif "flee" in awnser:
+		gold_room_2()
+	else:
+		dead("Insanity")
+		
+def dragon_room():
+	print "A large dragon blocks the exit."
+	print "It smells some of the gold you took and looks angry!"
+	dragon_moved = False
+	
+	while True:
+		awnser = raw_input("> ")
+	
+		if "give" in awnser:
+			print "The dragon lets you exit."
+			dragon_moved = True
+		elif "fight" in awnser:
+			print "Really? with no wepons? well, you could try."
+			dead("Attempting to kill a dragon with bare hands.")
+		elif "talk" in awnser:
+			print "This isn't fiction, dragons don't talk."
+		elif "door" in awnser and dragon_moved:
+			ogre_room()
+		elif "exit" in awnser and dragon_moved:
+			ogre_room()
+		else:
+			print "I don't understand."
+		
+		
+def gold_room():
+	print "A horde of gold is in this room."
+	print "How much do you take before moving on?"
+	
+	awnser = raw_input("> ")
+	
+	if 1 or 0 in awnser:
+		how_much = int(awnser)
+	else:
+		print "It's not rocket science just type a number."
+		dead("Being dumb.")
+	if how_much < 50:
+		print "You take some but your not greedy"
+		gold_room_2()
+	elif how_much > 50:
+		print "You greedy bastard!"
+		dead("Taking too much money.")
+	elif "don't" in awnser:
+		print "You coulden't help yourself and took some gold."
+		gold_room_2()
+	elif "all" in awnser:
+		print "You greedy bastard!"
+		dead("Taking all the money.")
+	else:
+		print "It's not rocket science just type a number."
+		dead("Being dumb.")
+		
+def gold_room_2():
+	print "You see two doors."
+	print "Right or left?"
+	
+	awnser = raw_input("> ")
+	
+	if "right" in awnser:
+		dragon_room()
+	elif "left" in awnser:
+		Cthulhu_room()
+	else:
+		print "can't do that."
+
+def riddle_room():
+	print "A door with the engravings:"
+	print " What can run but never walks, \nhas a mouth but never talks, \nhas a head but never weeps, \nhas a bed but never sleeps?"
+	print "It seems that you have to solve the riddle to pass."
+	riddle = False
+	
+	while True:
+		awnser = raw_input("> ")
+	
+		if "man" in awnser:
+			print "Correct, you can go through..."
+			riddle = True
+		elif "door" in awnser and riddle:
+			gold_room()
+		elif "door" in awnser and not riddle:
+			print "That also works..."
+			gold_room()
+		else:
+			print "wrong."
+			
+def bear_room():
+	print "A bear holding a jar of honey is blocking the exit."
+	print "The fat bear can't get out of the way."
+	bear_moved = False
+	
+	while True:
+		awnser = raw_input("> ")
+		
+		if "eat" in awnser:
+			honey()
+		elif "move" in awnser:
+			print "The bear eats your legs off."
+			dead("Bear necessities.")
+		elif "attack" in awnser:
+			print "The bear eats your face off."
+			dead("Bear necessities.")
+		elif "kill" in awnser:
+			print "No"
+			print "\nThats bad."
+		elif "taunt" in awnser:
+			print "The bear moves out of the way."
+			bear_moved = True 
+		elif "door" in awnser and not bear_moved:
+			gold_room()
+		else:
+			print "Can't do that."
+			
+
+def honey():
+	print "You dip your finger in the honey and taste it."
+	print "\nYou now have entered a psychedelic experience."
+	print "\nIt wasen't honey"
+	dead("Don't do drugs.")
+
+def start():
+	print "You enter a dark room with two doors."
+	print "Do you go left or right?"
+	
+	awnser = raw_input("> ")
+	
+	if "left" in awnser:
+		riddle_room()
+	elif "right" in awnser:
+		bear_room()
+		
+def ogre_room():
+	print "An ogre is sleeping on one side of the room."
+	print "The door is just ahead."
+	
+	awnser = raw_input("> ")
+	
+	
+	if "Kill" in awnser:
+		print "Why would you do that?"
+		print "\nThats crule."
+	elif "sneak" in awnser:
+		print "You make it across the room."
+		element_room()
+	elif "walk" in awnser:
+		print "You make it across the room."
+		element_room()
+	elif "Wake" in awnser:
+		print "The ogre wakes up.... \nand tears you in half."
+		dead("Section 2B in the dungeon master's manual: Ogres hibernate.")
+	elif "yell" in awnser:
+		print "The ogre wakes up.... \nand tears you in half."
+		dead("Section 2B in the dungeon master's manual: Ogres hibernate.")
+	elif "kick" in awnser:
+		print "The ogre wakes up.... \nand tears you in half."
+		dead("Section 2B in the dungeon master's manual: Ogres hibernate.")
+	elif "walk" in awnser:
+		print "You make it across the room."
+		element_room()
+	else:
+		print "I don't know what you mean." 
+		ogre_room()
+		
+def element_room():
+	False
+	print "You are in a room with three doors:"
+	print "One labeled fire, one water, and another air."
+	print "Which do you take?"
+	
+	awnser = raw_input("> ")
+	
+	if "air" in awnser:
+		air_room()
+	elif "water" in awnser:
+		water_room()
+	elif "fire" in awnser:
+		fire_room()
+	else:
+		print "Pick a room dummy."
+		
+def fire_room():
+	print "You see a party sized bag of Flamin' Hot Cheetos in the center of the room."
+	print "The door is just ahead but you suddenly have a craving for cheetos."
+	print "You hear a voice whisper:\"eat me\""
+	
+	awnser = raw_input("> ")
+	
+	if "eat" in awnser:
+		cheetos()
+	elif "leave" in awnser:
+		fight_room()
+	elif "door" in awnser:
+		fight_room()
+	elif "bag" in awnser:
+		cheetos()
+	else:
+		print "I don't know what that means."
+
+def cheetos():
+	print "You begin to feel a hot sensation in your body."
+	print "\nthen your stomach immediantly combust."
+	dead("what do they put in cheetos anyway?")
+	
+def air_room():
+	print "A fun sized bag of Lays Potato Chips is in the center of the room."
+	print "But the bag has a rare feature."
+	print "It seems that the bag is full of chips."
+	print "Not air."
+	
+	awnser = raw_input("> ")
+	
+	if "bag" in awnser:
+		lays()
+	elif "door" in awnser:
+		fight_room()
+	else:
+		print "I don't know what you mean."
+		
+def lays():
+	print "You open the bag and feel a strong gust of wind hit your face."
+	print "You look down the bag."
+	print "At the bottom of the bag is a single potato chip."
+	print "You move on to the next room in anger."
+		
+	fight_room()
+		
+def water_room():
+	print "A boat is floating on a river that leads towards a tunnel."
+	
+	
+	boat_moved = False
+	while True:
+		awnser = raw_input("> ")
+		if "ride" in awnser and not boat_moved:
+			print "You get in but the boat won't move."
+			print "The water is too still for anything to go."
+		elif "look" in awnser:
+			print "There is a lever at one side of the room."
+		elif "pull lever" in awnser:
+			print "you pull the lever, and the boat begins to move slowly."
+			boat_moved = True
+		elif "ride" in awnser and boat_moved:
+			print "You slowly make your way to the next room."
+			fight_room()
+		else:
+			print "I don't know what you mean."
+		
+	
+	
+def fight_room():
+	print "fight."
+	
+def gamble_room():
+	print "A man wants to play a game of blackjack with you."
+	print "Yes or no?"
+	
+	awnser = raw_input("> ")
+	
+	if "No" in awnser:
+		print "The man stabs you and leaves you to die."
+		dead("Gambling is a problem.")
+	elif "yes" in awnser:
+		game()
+	else:
+		print "what?"
+		
+def game():
+	print "The man is dealing..."
+	print "\nyou have a 10 on top and a 3 under."
+	print "The man has an 8 on top."
+	print "Do you hit?"
+	
+	awnser = raw_input("> ")
+	guys_hand = 18
+	hand = 13
+	if "yes" in awnser:
+		hand = 16
+		print "It's another 3, thats %d" % hand
+		print "Hit again?"
+		hit = raw_input("> ")
+		
+		if "yes" in hit:
+			hand = 19
+			print "3 again, that's %d" % hand 
+			print "Hit again?"
+			hit_two = raw_input("> ")
+		
+		elif "no" in hit:
+			print "The man has 18, you lose."
+			dead("You aren't very good at this game are you?")
+			if "yes" in hit_two:
+				hand = 23
+				print "It's a 5, that's %d you bust." % hand
+				dead("You aren't very good at this game are you?")
+			elif "no" in hit_two:
+				print "The man has 18, you win!"
+				print "You move on to the next room..."
+				fight_room()
+		
+	elif "no" in awnser:
+		print "The man has 18, you have 13..."
+		dead("Your not very good at blackjack are you?")
+	else:
+		print "It's a yes or no question."
+		game()
+				
+		
+ 
+ 
+ 
+
+
+	
+		
+		
+	
+		
+
+	
+	
+	
